@@ -56,7 +56,7 @@ namespace XBatteryStatus
 
             timer1 = new Timer();
             timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Interval = 10000;
+            timer1.Interval = Properties.Settings.Default.UpdateFrequency;
             timer1.Start();
         }
 
