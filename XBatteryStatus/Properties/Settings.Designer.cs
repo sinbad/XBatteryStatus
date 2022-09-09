@@ -70,5 +70,41 @@ namespace XBatteryStatus.Properties {
                 this["UpdateFrequency"] = value;
             }
         }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int WarningLevel0 {
+            get {
+                return ((int)(this["WarningLevel0"]));
+            }
+            set {
+                this["WarningLevel0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int WarningLevel1 {
+            get {
+                return ((int)(this["WarningLevel1"]));
+            }
+            set {
+                this["WarningLevel1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int WarningLevel2 {
+            get {
+                return ((int)(this["WarningLevel2"]));
+            }
+            set {
+                this["WarningLevel2"] = value;
+            }
+        }
+        
     }
 }

@@ -38,6 +38,9 @@ namespace XBatteryStatus
             var settings = Properties.Settings.Default;
             updateFrequency.Text = (settings.UpdateFrequency / 1000).ToString();
             notificationsEnabled.Checked = settings.EnableLowBatteryNotifications;
+            Warning0.Text = settings.WarningLevel0.ToString();
+            Warning1.Text = settings.WarningLevel1.ToString();
+            Warning2.Text = settings.WarningLevel2.ToString();
             audioEnabled.Checked = settings.EnableAudioNotifications;
             audioFileDropDown.Items.Clear();
             foreach (string opt in audioOptions)
@@ -63,6 +66,19 @@ namespace XBatteryStatus
                 if (int.TryParse(updateFrequency.Text, out newFreq))
                 {
                     settings.UpdateFrequency = newFreq * 1000;
+                }
+                int newPercent = 0;
+                if (int.TryParse(Warning0.Text, out newPercent))
+                {
+                    settings.WarningLevel0 = newPercent;
+                }
+                if (int.TryParse(Warning1.Text, out newPercent))
+                {
+                    settings.WarningLevel1 = newPercent;
+                }
+                if (int.TryParse(Warning2.Text, out newPercent))
+                {
+                    settings.WarningLevel2 = newPercent;
                 }
                 settings.EnableLowBatteryNotifications = notificationsEnabled.Checked;
                 settings.EnableAudioNotifications = audioEnabled.Checked;
@@ -97,35 +113,52 @@ namespace XBatteryStatus
             }
         }
 
-        private void updateFrequency_Validating(object sender, CancelEventArgs e)
+        private void validateNumberText(TextBox tb, string context, bool mustBePositive, CancelEventArgs e)
         {
-            errorProvider.SetError(updateFrequency, "");
+            errorProvider.SetError(tb, "");
 
-            if (updateFrequency.TextLength == 0)
+            if (tb.TextLength == 0)
             {
                 e.Cancel = true;
-                updateFrequency.Focus();
-                errorProvider.SetError(updateFrequency, "Update Frequency cannot be blank");
+                tb.Focus();
+                errorProvider.SetError(tb, $"{context} cannot be blank");
             } 
             else
             { 
                 int val;
-                if (!int.TryParse(updateFrequency.Text, System.Globalization.NumberStyles.Any, null, out val))
+                if (!int.TryParse(tb.Text, System.Globalization.NumberStyles.Any, null, out val))
                 {
                     e.Cancel = true;
-                    updateFrequency.Focus();
-                    errorProvider.SetError(updateFrequency, "Update Frequency is not a number");
+                    tb.Focus();
+                    errorProvider.SetError(tb, $"{context} is not a number");
                 }
                 else
                 {
-                    if (val <= 0)
+                    if (val <= 0 && mustBePositive)
                     {
                         e.Cancel = true;
-                        updateFrequency.Focus();
-                        errorProvider.SetError(updateFrequency, "Update Frequency must be greater than zero");
+                        tb.Focus();
+                        errorProvider.SetError(tb, $"{context} must be greater than zero");
                     }
                 }
             }
+
+        }
+        private void updateFrequency_Validating(object sender, CancelEventArgs e)
+        {
+            validateNumberText(updateFrequency, "Update Frequency", true, e);
+        }
+
+
+        private void Warning0_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if  (tb != null)
+            {
+                validateNumberText(tb, "Warning Level", true, e);
+            }
+
+            
         }
     }
 }

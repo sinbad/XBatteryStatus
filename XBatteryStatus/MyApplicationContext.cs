@@ -128,7 +128,9 @@ namespace XBatteryStatus
                     else notifyIcon.Icon = Properties.Resources.icon100;
 
                     if (settings.EnableLowBatteryNotifications &&
-                        (lastBattery > 15 && val <= 15) || (lastBattery > 10 && val <= 10) || (lastBattery > 5 && val <= 5))
+                        (lastBattery > settings.WarningLevel0 && val <= settings.WarningLevel0) || 
+                        (lastBattery > settings.WarningLevel1 && val <= settings.WarningLevel1) || 
+                        (lastBattery > settings.WarningLevel2 && val <= settings.WarningLevel2))
                     {
                         ToastContentBuilder builder = new ToastContentBuilder()
                             .AddText("Low Battery")
