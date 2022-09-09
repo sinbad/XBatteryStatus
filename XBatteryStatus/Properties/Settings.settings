@@ -14,6 +14,9 @@
     <Setting Name="UpdateFrequency" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>
     </Setting>
+    <Setting Name="LastBatteryReading" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
     <Setting Name="WarningLevel0" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
@@ -22,6 +25,9 @@
     </Setting>
     <Setting Name="WarningLevel2" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="EnableBatteryLogging" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

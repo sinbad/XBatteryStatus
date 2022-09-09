@@ -1,6 +1,8 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +24,9 @@ namespace XBatteryStatus
         public BluetoothLEDevice pairedGamepad;
         public GattCharacteristic batteryCharacteristic;
 
-        private int lastBattery = 100;
         private SettingsForm settingsForm;
+
+        private StreamWriter BatteryLogStream;
 
         public MyApplicationContext()
         {
@@ -101,7 +104,6 @@ namespace XBatteryStatus
 
         private async void ReadBattery()
         {
-
             var settings = Properties.Settings.Default;
 
             if (pairedGamepad != null && batteryCharacteristic != null &&
@@ -128,9 +130,9 @@ namespace XBatteryStatus
                     else notifyIcon.Icon = Properties.Resources.icon100;
 
                     if (settings.EnableLowBatteryNotifications &&
-                        (lastBattery > settings.WarningLevel0 && val <= settings.WarningLevel0) || 
-                        (lastBattery > settings.WarningLevel1 && val <= settings.WarningLevel1) || 
-                        (lastBattery > settings.WarningLevel2 && val <= settings.WarningLevel2))
+                        (settings.LastBatteryReading > settings.WarningLevel0 && val <= settings.WarningLevel0) || 
+                        (settings.LastBatteryReading > settings.WarningLevel1 && val <= settings.WarningLevel1) || 
+                        (settings.LastBatteryReading > settings.WarningLevel2 && val <= settings.WarningLevel2))
                     {
                         ToastContentBuilder builder = new ToastContentBuilder()
                             .AddText("Low Battery")
@@ -146,7 +148,14 @@ namespace XBatteryStatus
                         }
                         builder.Show();
                     }
-                    lastBattery = val;
+
+                    if (val != settings.LastBatteryReading)
+                    {
+                        MaybeLogBatteryChange(pairedGamepad.Name, settings.LastBatteryReading);
+                    }
+
+                    settings.LastBatteryReading = val;
+
                 }
             }
             else
@@ -154,6 +163,30 @@ namespace XBatteryStatus
                 notifyIcon.Icon = Properties.Resources.iconNone;
                 notifyIcon.Text = "XBatteryStatus: Controller disconnected";
             }
+        }
+
+        private async void MaybeLogBatteryChange(string name, int reading)
+        {
+            if (Properties.Settings.Default.EnableBatteryLogging)
+            {
+                try
+                {
+
+                    if (BatteryLogStream == null)
+                    {
+                        string filename = Path.Combine(FileHelpers.GetAppDataFolder(), "batterylog.csv");
+                        BatteryLogStream = new(filename, true);
+                    }
+
+                    string line = $"{DateTime.Now.ToString(DateTimeFormatInfo.InvariantInfo)},{name},{reading}";
+                    await BatteryLogStream.WriteLineAsync(line);
+                    await BatteryLogStream.FlushAsync();
+                }
+                catch (Exception) {}
+
+            }
+
+
         }
 
         private void ConnectionStatusChanged(BluetoothLEDevice sender, object args)
@@ -207,6 +240,10 @@ namespace XBatteryStatus
         private void OnApplicationExit(object sender, EventArgs e)
         {
             notifyIcon.Visible = false;
+            if (BatteryLogStream != null)
+            {
+                BatteryLogStream.Close();
+            }
         }
 
         public void Update()

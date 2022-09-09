@@ -50,12 +50,17 @@ namespace XBatteryStatus {
             this.okButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.logBattery = new System.Windows.Forms.CheckBox();
+            this.OpenDataFolder = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // updateFrequency
@@ -70,9 +75,9 @@ namespace XBatteryStatus {
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(67, 5);
+            this.label1.Location = new System.Drawing.Point(67, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 25);
@@ -81,9 +86,9 @@ namespace XBatteryStatus {
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -98,26 +103,30 @@ namespace XBatteryStatus {
             this.tableLayoutPanel1.Controls.Add(this.audioLabel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 1, 5);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 13);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(552, 203);
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(495, 300);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // flowLayoutPanel3
             // 
+            this.flowLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.flowLayoutPanel3.AutoSize = true;
             this.flowLayoutPanel3.Controls.Add(this.updateFrequency);
             this.flowLayoutPanel3.Controls.Add(this.label3);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(237, 0);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(237, 5);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(300, 40);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(132, 39);
             this.flowLayoutPanel3.TabIndex = 6;
             // 
             // label3
@@ -132,10 +141,10 @@ namespace XBatteryStatus {
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 45);
-            this.label2.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
+            this.label2.Location = new System.Drawing.Point(10, 62);
+            this.label2.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(217, 25);
             this.label2.TabIndex = 2;
@@ -145,8 +154,8 @@ namespace XBatteryStatus {
             // 
             this.notificationsEnabled.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.notificationsEnabled.AutoSize = true;
-            this.notificationsEnabled.Location = new System.Drawing.Point(242, 49);
-            this.notificationsEnabled.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.notificationsEnabled.Location = new System.Drawing.Point(242, 68);
+            this.notificationsEnabled.Margin = new System.Windows.Forms.Padding(5, 10, 3, 3);
             this.notificationsEnabled.Name = "notificationsEnabled";
             this.notificationsEnabled.Size = new System.Drawing.Size(22, 21);
             this.notificationsEnabled.TabIndex = 6;
@@ -154,9 +163,9 @@ namespace XBatteryStatus {
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(132, 165);
+            this.label4.Location = new System.Drawing.Point(132, 215);
             this.label4.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(95, 25);
@@ -165,11 +174,14 @@ namespace XBatteryStatus {
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.Controls.Add(this.audioFileDropDown);
             this.flowLayoutPanel2.Controls.Add(this.testAudio);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(240, 163);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(237, 205);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(308, 37);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(258, 40);
             this.flowLayoutPanel2.TabIndex = 6;
             // 
             // audioFileDropDown
@@ -195,8 +207,8 @@ namespace XBatteryStatus {
             // 
             this.audioEnabled.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.audioEnabled.AutoSize = true;
-            this.audioEnabled.Location = new System.Drawing.Point(242, 129);
-            this.audioEnabled.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.audioEnabled.Location = new System.Drawing.Point(242, 168);
+            this.audioEnabled.Margin = new System.Windows.Forms.Padding(5, 10, 3, 3);
             this.audioEnabled.Name = "audioEnabled";
             this.audioEnabled.Size = new System.Drawing.Size(22, 21);
             this.audioEnabled.TabIndex = 7;
@@ -204,9 +216,9 @@ namespace XBatteryStatus {
             // 
             // audioLabel
             // 
-            this.audioLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.audioLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.audioLabel.AutoSize = true;
-            this.audioLabel.Location = new System.Drawing.Point(122, 125);
+            this.audioLabel.Location = new System.Drawing.Point(122, 165);
             this.audioLabel.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
             this.audioLabel.Name = "audioLabel";
             this.audioLabel.Size = new System.Drawing.Size(105, 25);
@@ -215,9 +227,9 @@ namespace XBatteryStatus {
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(93, 85);
+            this.label5.Location = new System.Drawing.Point(93, 115);
             this.label5.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(134, 25);
@@ -226,16 +238,18 @@ namespace XBatteryStatus {
             // 
             // flowLayoutPanel4
             // 
+            this.flowLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.flowLayoutPanel4.AutoSize = true;
             this.flowLayoutPanel4.Controls.Add(this.Warning0);
             this.flowLayoutPanel4.Controls.Add(this.label6);
             this.flowLayoutPanel4.Controls.Add(this.Warning1);
             this.flowLayoutPanel4.Controls.Add(this.label7);
             this.flowLayoutPanel4.Controls.Add(this.Warning2);
             this.flowLayoutPanel4.Controls.Add(this.label8);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(237, 80);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(237, 105);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(300, 40);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(246, 39);
             this.flowLayoutPanel4.TabIndex = 8;
             // 
             // Warning0
@@ -326,7 +340,7 @@ namespace XBatteryStatus {
             this.flowLayoutPanel1.Controls.Add(this.cancelButton);
             this.flowLayoutPanel1.Controls.Add(this.okButton);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(265, 222);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(210, 325);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(300, 41);
             this.flowLayoutPanel1.TabIndex = 5;
@@ -335,13 +349,57 @@ namespace XBatteryStatus {
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(74, 265);
+            this.label9.Margin = new System.Windows.Forms.Padding(10, 5, 10, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(153, 25);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Log Battery Stats?";
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.Controls.Add(this.logBattery);
+            this.flowLayoutPanel5.Controls.Add(this.OpenDataFolder);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(237, 257);
+            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(182, 40);
+            this.flowLayoutPanel5.TabIndex = 9;
+            // 
+            // logBattery
+            // 
+            this.logBattery.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.logBattery.AutoSize = true;
+            this.logBattery.Location = new System.Drawing.Point(5, 9);
+            this.logBattery.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.logBattery.Name = "logBattery";
+            this.logBattery.Size = new System.Drawing.Size(22, 21);
+            this.logBattery.TabIndex = 7;
+            this.logBattery.UseVisualStyleBackColor = true;
+            // 
+            // OpenDataFolder
+            // 
+            this.OpenDataFolder.Location = new System.Drawing.Point(33, 3);
+            this.OpenDataFolder.Name = "OpenDataFolder";
+            this.OpenDataFolder.Size = new System.Drawing.Size(146, 34);
+            this.OpenDataFolder.TabIndex = 8;
+            this.OpenDataFolder.Text = "Open Folder";
+            this.OpenDataFolder.UseVisualStyleBackColor = true;
+            this.OpenDataFolder.Click += new System.EventHandler(this.OpenDataFolder_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(573, 264);
+            this.ClientSize = new System.Drawing.Size(518, 367);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -360,7 +418,10 @@ namespace XBatteryStatus {
             this.flowLayoutPanel4.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -391,5 +452,9 @@ namespace XBatteryStatus {
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox Warning2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.CheckBox logBattery;
+        private System.Windows.Forms.Button OpenDataFolder;
     }
 }

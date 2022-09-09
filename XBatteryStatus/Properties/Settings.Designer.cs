@@ -70,6 +70,19 @@ namespace XBatteryStatus.Properties {
                 this["UpdateFrequency"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int LastBatteryReading {
+            get {
+                return ((int)(this["LastBatteryReading"]));
+            }
+            set {
+                this["LastBatteryReading"] = value;
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
@@ -106,5 +119,16 @@ namespace XBatteryStatus.Properties {
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableBatteryLogging {
+            get {
+                return ((bool)(this["EnableBatteryLogging"]));
+            }
+            set {
+                this["EnableBatteryLogging"] = value;
+            }
+        }
     }
 }

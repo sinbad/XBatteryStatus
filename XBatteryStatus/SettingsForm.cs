@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -49,6 +50,7 @@ namespace XBatteryStatus
                 audioFileDropDown.Items.Add(lastPart);
             }
             audioFileDropDown.SelectedIndex = Array.FindIndex(audioOptions, item => item == settings.LowBatteryAudio);
+            logBattery.Checked = settings.EnableBatteryLogging;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -86,6 +88,7 @@ namespace XBatteryStatus
                 {
                     settings.LowBatteryAudio = audioOptions[audioFileDropDown.SelectedIndex];
                 }
+                settings.EnableBatteryLogging = logBattery.Checked;
                 settings.Save();
                 DialogResult = DialogResult.OK;
                 Close();
@@ -159,6 +162,14 @@ namespace XBatteryStatus
             }
 
             
+        }
+
+        private void OpenDataFolder_Click(object sender, EventArgs e)
+        {
+            // Note: Windows.Storage.ApplicationData is completely unreliable
+            // So this data won't be in the same location as settings
+            string baseAppData = FileHelpers.GetAppDataFolder();
+            Process.Start(@"explorer.exe", baseAppData);
         }
     }
 }
