@@ -151,10 +151,11 @@ namespace XBatteryStatus
 
                     if (val != settings.LastBatteryReading)
                     {
-                        MaybeLogBatteryChange(pairedGamepad.Name, settings.LastBatteryReading);
+                        MaybeLogBatteryChange(pairedGamepad.Name, val);
+                        settings.LastBatteryReading = val;
+                        settings.Save();
                     }
 
-                    settings.LastBatteryReading = val;
 
                 }
             }
