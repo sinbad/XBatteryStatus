@@ -30,6 +30,9 @@ namespace XBatteryStatus
 
         public MyApplicationContext()
         {
+
+            UpgradeSettings();
+
             notifyIcon.Icon = Properties.Resources.iconQ;
             notifyIcon.Text = "XBatteryStatus: Looking for paired controller";
             notifyIcon.Visible = true;
@@ -62,6 +65,7 @@ namespace XBatteryStatus
             timer1.Interval = Properties.Settings.Default.UpdateFrequency;
             timer1.Start();
         }
+
 
         async private void FindBleController()
         {
@@ -224,6 +228,21 @@ namespace XBatteryStatus
         {
             Application.Exit();
         }
+
+        private void UpgradeSettings()
+        {
+            // Needed when assembly version changes
+            // Because the file location changes (AppData\Local\XBatteryStatus\XBatteryStatus_Url_<somegeneratedstring>
+            var settings = Properties.Settings.Default;
+
+            if (settings.UpgradeRequired)
+            {
+                settings.Upgrade();
+                settings.UpgradeRequired = false;
+                settings.Save();
+            }
+        }
+
         private void SettingsClicked(object sender, EventArgs e) 
         {
             // Prevent double-opening
