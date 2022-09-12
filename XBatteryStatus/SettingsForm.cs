@@ -36,21 +36,21 @@ namespace XBatteryStatus
 
             this.CancelButton = cancelButton;
 
-            var settings = Properties.Settings.Default;
-            updateFrequency.Text = (settings.UpdateFrequency / 1000).ToString();
+            var settings = UserSettings.Get();
+            updateFrequency.Text = (settings.UpdateFrequencyMs / 1000).ToString();
             notificationsEnabled.Checked = settings.EnableLowBatteryNotifications;
             Warning0.Text = settings.WarningLevel0.ToString();
             Warning1.Text = settings.WarningLevel1.ToString();
             Warning2.Text = settings.WarningLevel2.ToString();
-            audioEnabled.Checked = settings.EnableAudioNotifications;
+            audioEnabled.Checked = settings.EnableNotificationAudio;
             audioFileDropDown.Items.Clear();
             foreach (string opt in audioOptions)
             {
                 string lastPart = opt.Split('.').Last();
                 audioFileDropDown.Items.Add(lastPart);
             }
-            audioFileDropDown.SelectedIndex = Array.FindIndex(audioOptions, item => item == settings.LowBatteryAudio);
-            logBattery.Checked = settings.EnableBatteryLogging;
+            audioFileDropDown.SelectedIndex = Array.FindIndex(audioOptions, item => item == settings.NotificationAudio);
+            logBattery.Checked = settings.EnableBatteryLog;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -63,11 +63,11 @@ namespace XBatteryStatus
         {
             if (ValidateChildren())
             {
-                var settings = Properties.Settings.Default;
+                var settings = UserSettings.Get();
                 int newFreq = 0;
                 if (int.TryParse(updateFrequency.Text, out newFreq))
                 {
-                    settings.UpdateFrequency = newFreq * 1000;
+                    settings.UpdateFrequencyMs = newFreq * 1000;
                 }
                 int newPercent = 0;
                 if (int.TryParse(Warning0.Text, out newPercent))
@@ -83,12 +83,12 @@ namespace XBatteryStatus
                     settings.WarningLevel2 = newPercent;
                 }
                 settings.EnableLowBatteryNotifications = notificationsEnabled.Checked;
-                settings.EnableAudioNotifications = audioEnabled.Checked;
+                settings.EnableNotificationAudio = audioEnabled.Checked;
                 if (audioFileDropDown.SelectedIndex >= 0 && audioFileDropDown.SelectedIndex < audioOptions.Length)
                 {
-                    settings.LowBatteryAudio = audioOptions[audioFileDropDown.SelectedIndex];
+                    settings.NotificationAudio = audioOptions[audioFileDropDown.SelectedIndex];
                 }
-                settings.EnableBatteryLogging = logBattery.Checked;
+                settings.EnableBatteryLog = logBattery.Checked;
                 settings.Save();
                 DialogResult = DialogResult.OK;
                 Close();

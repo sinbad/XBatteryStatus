@@ -31,8 +31,6 @@ namespace XBatteryStatus
         public MyApplicationContext()
         {
 
-            UpgradeSettings();
-
             notifyIcon.Icon = Properties.Resources.iconQ;
             notifyIcon.Text = "XBatteryStatus: Looking for paired controller";
             notifyIcon.Visible = true;
@@ -62,7 +60,7 @@ namespace XBatteryStatus
 
             timer1 = new Timer();
             timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Interval = Properties.Settings.Default.UpdateFrequency;
+            timer1.Interval = UserSettings.Get().UpdateFrequencyMs;
             timer1.Start();
         }
 
@@ -108,7 +106,7 @@ namespace XBatteryStatus
 
         private async void ReadBattery()
         {
-            var settings = Properties.Settings.Default;
+            var settings = UserSettings.Get();
 
             if (pairedGamepad != null && batteryCharacteristic != null &&
                 pairedGamepad.ConnectionStatus == BluetoothConnectionStatus.Connected)
@@ -142,11 +140,11 @@ namespace XBatteryStatus
                             .AddText("Low Battery")
                             .AddText(notify);
 
-                        if (settings.EnableAudioNotifications) 
+                        if (settings.EnableNotificationAudio) 
                         {
                             builder.AddAudio(new ToastAudio() 
                             {
-                                Src = new Uri(settings.LowBatteryAudio),
+                                Src = new Uri(settings.NotificationAudio),
                                 Loop = false
                             });
                         }
@@ -172,7 +170,7 @@ namespace XBatteryStatus
 
         private async void MaybeLogBatteryChange(string name, int reading)
         {
-            if (Properties.Settings.Default.EnableBatteryLogging)
+            if (UserSettings.Get().EnableBatteryLog)
             {
                 try
                 {
@@ -229,20 +227,6 @@ namespace XBatteryStatus
             Application.Exit();
         }
 
-        private void UpgradeSettings()
-        {
-            // Needed when assembly version changes
-            // Because the file location changes (AppData\Local\XBatteryStatus\XBatteryStatus_Url_<somegeneratedstring>
-            var settings = Properties.Settings.Default;
-
-            if (settings.UpgradeRequired)
-            {
-                settings.Upgrade();
-                settings.UpgradeRequired = false;
-                settings.Save();
-            }
-        }
-
         private void SettingsClicked(object sender, EventArgs e) 
         {
             // Prevent double-opening
@@ -251,7 +235,7 @@ namespace XBatteryStatus
                 settingsForm = new SettingsForm();
                 if (settingsForm.ShowDialog() == DialogResult.OK)
                 {
-                    timer1.Interval = Properties.Settings.Default.UpdateFrequency;
+                    timer1.Interval = UserSettings.Get().UpdateFrequencyMs;
                 }
                 settingsForm = null;
             }
